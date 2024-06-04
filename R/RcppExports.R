@@ -3,9 +3,13 @@
 
 #' Generate ULID
 #'
-#' [generate()] generates a new [Universally Unique Lexicographically
+#' `generate()` generates a new [Universally Unique Lexicographically
 #' Sortable Identifier](https://github.com/ulid/spec). Several aliases are
 #' available for convience and backwards-compatibility.
+#'
+#' Note that up until release 0.3.1, the implementations had limitations
+#' that resulted in second rather than millisecond resolution. This has
+#' been addressed for release 0.4.0 and is now supported as expected.
 #'
 #' @md
 #' @param n number of id's to generate (default = `1`)
@@ -20,12 +24,12 @@ generate <- function(n = 1L) {
 #' Unmarshal a ULID into a data frame with timestamp and random bitstring columns
 #'
 #' @md
-#' @param ulids character ULIDs (e.g. created with [ULIDgenerate()])
+#' @param ulids character ULIDs (e.g. created with `generate()`)
 #' @export
 #' @rdname ulid
-#' @return data frame (tibble)
+#' @return A `data.frame` with two columns `ts` and `rnd`.
 #' @examples
-#' unmarshal(ULIDgenerate())
+#' unmarshal(generate())
 unmarshal <- function(ulids) {
     .Call(`_ulid_unmarshal`, ulids)
 }
